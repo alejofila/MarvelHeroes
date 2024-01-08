@@ -2,7 +2,7 @@ package com.example.marvelchallenge.di
 
 import com.example.marvelchallenge.data.remote.MarvelApi
 import com.example.marvelchallenge.data.repository.CharactersRepositoryImpl
-import com.example.marvelchallenge.data.repository.ComicRepositoryImpl
+import com.example.marvelchallenge.data.repository.ComicsRepositoryImpl
 import com.example.marvelchallenge.data.repository.EventsRepositoryImpl
 import com.example.marvelchallenge.data.repository.SeriesRepositoryImpl
 import com.example.marvelchallenge.domain.repository.CharactersRepository
@@ -67,12 +67,12 @@ object AppModule {
     fun provideCharactersRepository(impl: CharactersRepositoryImpl): CharactersRepository
 
     @Binds
-    fun providesComicRepository(@Singleton impl: ComicRepositoryImpl): ComicRepository
+    fun providesComicRepository(impl: ComicsRepositoryImpl): ComicRepository
 
     @Binds
-    fun providesEventsRepository(@Singleton impl: EventsRepositoryImpl): EventsRepository
+    fun providesEventsRepository( impl: EventsRepositoryImpl): EventsRepository
 
     @Binds
-    fun provideSeriesRepository(@Singleton impl: SeriesRepositoryImpl): SeriesRepository
+    fun provideSeriesRepository( impl: SeriesRepositoryImpl): SeriesRepository
   }
 }

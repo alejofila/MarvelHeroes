@@ -3,18 +3,17 @@ package com.example.marvelchallenge.data.remote.datasource
 import com.example.marvelchallenge.core.Either
 import com.example.marvelchallenge.data.DataError
 import com.example.marvelchallenge.data.remote.MarvelApi
-import com.example.marvelchallenge.data.remote.model.EventResult
+import com.example.marvelchallenge.data.remote.model.EventDataItem
 import javax.inject.Inject
-
 
 class EventsRemoteDataSource @Inject constructor(
   private val helper: DataFetcherHelper,
   private val api: MarvelApi
-) {
+) : BaseRemoteDataSource<EventDataItem> {
 
-  suspend fun getEventsForCharacter(id: Int): Either<DataError, List<EventResult>> {
+  override suspend fun getItemsForCharacter(characterId: Int): Either<DataError, List<EventDataItem>> {
     return helper.fetchData {
-      api.getEventsForCharacter(id).data.results
+      api.getEventsForCharacter(characterId).data.results
     }
   }
 }

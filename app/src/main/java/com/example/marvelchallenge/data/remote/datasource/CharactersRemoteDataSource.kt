@@ -18,4 +18,5 @@ class CharactersRemoteDataSource @Inject constructor(
         .results
     }
   }
+
 }

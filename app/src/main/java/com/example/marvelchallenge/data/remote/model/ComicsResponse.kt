@@ -16,11 +16,11 @@ data class ComicData(
   @Json(name = "limit") val limit: Int,
   @Json(name = "total") val total: Int,
   @Json(name = "count") val count: Int,
-  @Json(name = "results") val results: List<ComicResult>
+  @Json(name = "results") val results: List<ComicDataItem>
 )
 
 @JsonClass(generateAdapter = true)
-data class ComicResult(
+data class ComicDataItem(
   @Json(name = "id") val id: Int,
   @Json(name = "title") val title: String,
   @Json(name = "description") val description: String,

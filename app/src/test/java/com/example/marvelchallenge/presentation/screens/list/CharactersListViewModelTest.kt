@@ -3,7 +3,7 @@ package com.example.marvelchallenge.presentation.screens.list
 import com.example.marvelchallenge.common.MainDispatcherRule
 import com.example.marvelchallenge.core.toLeft
 import com.example.marvelchallenge.core.toRight
-import com.example.marvelchallenge.domain.GetCharactersInteractor
+import com.example.marvelchallenge.domain.GetCharactersInformationInteractor
 import com.example.marvelchallenge.presentation.mapper.CharacterMapperUIModel
 import com.example.marvelchallenge.presentation.mapper.CharacterListUIErrorMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -64,7 +64,7 @@ class CharactersListViewModelTest {
   @get:Rule
   val mainDispatcherRule = MainDispatcherRule(testDispatcher)
 
-  private val getCharactersInteractor: GetCharactersInteractor = mock()
+  private val getCharactersInformationInteractor: GetCharactersInformationInteractor = mock()
   private val mapper = CharacterMapperUIModel()
   private val errorMapper = CharacterListUIErrorMapper()
 
@@ -72,7 +72,7 @@ class CharactersListViewModelTest {
 
   @Before
   fun setup() {
-    viewModel = CharactersListViewModel(mapper, errorMapper, getCharactersInteractor)
+    viewModel = CharactersListViewModel(mapper, errorMapper, getCharactersInformationInteractor)
   }
 
   @Test
@@ -80,7 +80,7 @@ class CharactersListViewModelTest {
     runTest {
       // Given
 
-      whenever(getCharactersInteractor("", 0)).thenReturn(listOfDomainCharacters.toRight())
+      whenever(getCharactersInformationInteractor("", 0)).thenReturn(listOfDomainCharacters.toRight())
 
       // When
       viewModel.queryCharacters("")
@@ -106,7 +106,7 @@ class CharactersListViewModelTest {
     runTest {
       // Given
       whenever(
-        getCharactersInteractor(
+        getCharactersInformationInteractor(
           "",
           0
         )
@@ -135,7 +135,7 @@ class CharactersListViewModelTest {
     runTest {
       // Given
       val listOfDomainCharactersPage2 = listOf(domainCharacter, domainCharacter2)
-      whenever(getCharactersInteractor("", 1)).thenReturn(listOfDomainCharactersPage2.toRight())
+      whenever(getCharactersInformationInteractor("", 1)).thenReturn(listOfDomainCharactersPage2.toRight())
 
 
       viewModel.queryNextPage()
@@ -162,7 +162,7 @@ class CharactersListViewModelTest {
   fun `Given consecutive calls to queryCharacters , when queryCharacters is called three times in a row, then getCharactersInteractor should be called single time with the last query string`() =
     runTest {
       // Given
-      whenever(getCharactersInteractor("cap", 0)).thenReturn(listOfDomainCharacters.toRight())
+      whenever(getCharactersInformationInteractor("cap", 0)).thenReturn(listOfDomainCharacters.toRight())
 
       // When
       viewModel.queryCharacters("c")
@@ -171,9 +171,9 @@ class CharactersListViewModelTest {
 
       // Then
       viewModel.characterScreenUIState.first { it.characterListState is CharacterListState.Success && it.characterListState.characters.isNotEmpty() }
-      verify(getCharactersInteractor, times(1)).invoke("cap", 0)
+      verify(getCharactersInformationInteractor, times(1)).invoke("cap", 0)
 
       // Check that no more calls were made to getCharactersInteractor
-      verifyNoMoreInteractions(getCharactersInteractor)
+      verifyNoMoreInteractions(getCharactersInformationInteractor)
     }
 }

@@ -16,11 +16,11 @@ data class EventData(
   @Json(name = "limit") val limit: Int,
   @Json(name = "total") val total: Int,
   @Json(name = "count") val count: Int,
-  @Json(name = "results") val results: List<EventResult>
+  @Json(name = "results") val results: List<EventDataItem>
 )
 
 @JsonClass(generateAdapter = true)
-data class EventResult(
+data class EventDataItem(
   @Json(name = "id") val id: Int,
   @Json(name = "title") val title: String,
   @Json(name = "description") val description: String,

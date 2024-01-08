@@ -1,6 +1,6 @@
 package com.example.marvelchallenge.data.mapper
 
-import com.example.marvelchallenge.data.remote.model.ComicResult
+import com.example.marvelchallenge.data.remote.model.ComicDataItem
 import com.example.marvelchallenge.data.remote.model.MarvelComicItem
 import com.example.marvelchallenge.domain.model.Comic
 import com.example.marvelchallenge.domain.model.ComicDetails
@@ -12,11 +12,26 @@ class ComicDTOMapper @Inject constructor() {
     val id = marvelComicItem.resourceURI.split("/").last().toInt()
     return Comic(
       id = id,
-      name = marvelComicItem.name
+      name = marvelComicItem.name,
     )
   }
 
-  fun mapToDomain(comicResponse: ComicResult): ComicDetails {
+  fun mapDetailsToDomain(comicDataItem: ComicDataItem): Comic {
+    return with(comicDataItem) {
+      Comic(
+        id = id,
+        name = title,
+        details = ComicDetails(
+          description = description,
+          thumbnailUrl = thumbnail.path + "." + thumbnail.extension,
+          pageCount = pageCount,
+        )
+      )
+    }
+
+  }
+
+  fun mapToDomain(comicResponse: ComicDataItem): ComicDetails {
     return with(comicResponse) {
       ComicDetails(
         description = description,

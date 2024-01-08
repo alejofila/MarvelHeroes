@@ -29,7 +29,6 @@ fun SearchAppBar(
   text: String,
   onTextChange: (String) -> Unit,
   onSearchClicked: (String) -> Unit,
-  onCloseClicked: () -> Unit = {},
 ) {
   Surface(
     modifier = Modifier
@@ -63,20 +62,6 @@ fun SearchAppBar(
           Icon(
             imageVector = Icons.Default.Search,
             contentDescription = "Search Icon",
-            tint = Color.White,
-          )
-        }
-      },
-      trailingIcon = {
-        IconButton(
-          modifier = Modifier.alpha(0.4f),
-          onClick = {
-            onCloseClicked()
-          },
-        ) {
-          Icon(
-            imageVector = Icons.Default.Close,
-            contentDescription = "Clear Text Icon",
             tint = Color.White,
           )
         }

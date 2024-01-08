@@ -11,4 +11,5 @@ internal data class CharacterScreenUIState(
 internal sealed class CharacterListState {
   data class Success(val characters: List<CharacterUIModel>) : CharacterListState()
   data class Error(val message: String) : CharacterListState()
+  object NoResults : CharacterListState()
 }

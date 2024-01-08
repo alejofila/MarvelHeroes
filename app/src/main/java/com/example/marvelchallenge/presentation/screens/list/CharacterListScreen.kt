@@ -34,6 +34,7 @@ import com.example.marvelchallenge.presentation.components.SearchAppBar
 import com.example.marvelchallenge.presentation.screens.list.CharacterListState.Error
 import com.example.marvelchallenge.presentation.screens.list.CharacterListState.Success
 import com.example.marvelchallenge.presentation.model.CharacterUIModel
+import com.example.marvelchallenge.presentation.screens.list.CharacterListState.NoResults
 
 @Composable
 internal fun CharacterListScreen(
@@ -83,15 +84,15 @@ private fun CharactersList(
     Spacer(modifier = Modifier.height(16.dp))
     when (characterListState) {
       is Success -> {
-        if (characterListState.characters.isEmpty()) {
-          EmptyList()
-        } else {
-          CharacterList(characterListState.characters, isLoading, onLoadMore, onCharacterClick)
-        }
+        CharacterList(characterListState.characters, isLoading, onLoadMore, onCharacterClick)
+
       }
+
       is Error -> {
         ErrorList(characterListState.message)
       }
+
+      NoResults -> EmptyList()
     }
   }
 }

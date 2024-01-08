@@ -2,7 +2,7 @@ package com.example.marvelchallenge.presentation.screens.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.marvelchallenge.domain.GetCharactersInteractor
+import com.example.marvelchallenge.domain.GetCharactersInformationInteractor
 import com.example.marvelchallenge.domain.model.Character
 import com.example.marvelchallenge.domain.repository.DomainError
 import com.example.marvelchallenge.presentation.mapper.CharacterMapperUIModel
@@ -22,7 +22,7 @@ import javax.inject.Inject
 internal class CharactersListViewModel @Inject constructor(
   private val mapper: CharacterMapperUIModel,
   private val errorMapper: CharacterListUIErrorMapper,
-  private val getCharactersInteractor: GetCharactersInteractor
+  private val getCharactersInformationInteractor: GetCharactersInformationInteractor
 ) : ViewModel() {
   private var pageCount = 0
   private val _characterScreenUIState = MutableStateFlow(
@@ -68,7 +68,7 @@ internal class CharactersListViewModel @Inject constructor(
         )
       }
       _characterScreenUIState.debounce(SEARCH_QUERY_DEBOUNCE_TIME).collectLatest { state ->
-        getCharactersInteractor(state.searchQuery, pageCount).fold(
+        getCharactersInformationInteractor(state.searchQuery, pageCount).fold(
           ifLeft = { domainError ->
             handleError(domainError)
           },

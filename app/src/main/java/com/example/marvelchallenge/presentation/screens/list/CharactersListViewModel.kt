@@ -6,7 +6,7 @@ import com.example.marvelchallenge.domain.GetCharactersInteractor
 import com.example.marvelchallenge.domain.model.Character
 import com.example.marvelchallenge.domain.repository.DomainError
 import com.example.marvelchallenge.presentation.mapper.CharacterMapperUIModel
-import com.example.marvelchallenge.presentation.mapper.ErrorMapper
+import com.example.marvelchallenge.presentation.mapper.CharacterListUIErrorMapper
 import com.example.marvelchallenge.presentation.screens.list.CharacterListState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
@@ -19,9 +19,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CharactersListViewModel @Inject constructor(
+internal class CharactersListViewModel @Inject constructor(
   private val mapper: CharacterMapperUIModel,
-  private val errorMapper: ErrorMapper,
+  private val errorMapper: CharacterListUIErrorMapper,
   private val getCharactersInteractor: GetCharactersInteractor
 ) : ViewModel() {
   private var pageCount = 0
@@ -39,12 +39,10 @@ class CharactersListViewModel @Inject constructor(
   fun queryCharacters(queryString: String) {
     _characterScreenUIState.update { oldState ->
       oldState.copy(
-        isLoading = true,
         searchQuery = queryString
       )
-
     }
-    resetPageCount() // reset the page count
+    resetPageCount()
     query()
   }
 

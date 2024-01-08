@@ -7,7 +7,7 @@ import com.example.marvelchallenge.domain.repository.DomainError.UnknownError
 import com.example.marvelchallenge.presentation.screens.list.CharacterListState
 import javax.inject.Inject
 
-class ErrorMapper @Inject constructor(){
+internal class CharacterListUIErrorMapper @Inject constructor(){
 
   fun mapToUIError(domainError: DomainError): CharacterListState.Error {
     return when (domainError) {

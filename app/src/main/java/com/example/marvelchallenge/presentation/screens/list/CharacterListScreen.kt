@@ -36,7 +36,7 @@ import com.example.marvelchallenge.presentation.screens.list.CharacterListState.
 import com.example.marvelchallenge.presentation.model.CharacterUIModel
 
 @Composable
-fun CharacterListScreen(
+internal fun CharacterListScreen(
   characterListState: CharacterListState,
   searchQuery: String,
   isLoading: Boolean,

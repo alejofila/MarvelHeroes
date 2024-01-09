@@ -1,3 +1,6 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.util.Properties
+
 plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
@@ -15,6 +18,8 @@ android {
     targetSdk = 34
     versionCode = 1
     versionName = "1.0"
+    val key: String = gradleLocalProperties(rootDir).getProperty("MARVEL_API_KEY") ?: ""
+    buildConfigField("String", "MARVEL_API_KEY", "\"$key\"")
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables {
@@ -37,6 +42,7 @@ android {
   }
   buildFeatures {
     compose = true
+    buildConfig = true
   }
   composeOptions {
     kotlinCompilerExtensionVersion = "1.4.3"
@@ -83,4 +89,15 @@ dependencies {
   kapt(libs.dagger.compiler)
   kapt(libs.hilt.android.compiler)
 
+}
+
+fun getProperty(propertyName: String): String {
+  val properties = Properties()
+  val localPropertiesFile = File(rootProject.projectDir, "local.properties")
+
+  if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { properties.load(it) }
+  }
+
+  return properties.getProperty(propertyName, "")
 }

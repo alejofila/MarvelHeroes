@@ -1,3 +1,9 @@
+# How to run the project?
+Create a file named `local.properties` in the root of the project and add your marvel api keys like this:
+MARVEL_API_KEY = XXXXXXX
+
+
+
 # Architecture
 Clean Architecture and Dependency Rule
 Although the project is not separated into distinct modules, I ensured that it respects the Clean Architecture dependency rule:

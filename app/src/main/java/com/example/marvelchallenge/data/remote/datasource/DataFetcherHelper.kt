@@ -16,6 +16,7 @@ class DataFetcherHelper @Inject constructor(
     apiCall: suspend () -> T
   ): Either<DataError, T> {
     return if (connectionHelper.isNetworkAvailable()) {
+
       runCatching { apiCall() }
         .fold(
           onSuccess = { it.toRight() },

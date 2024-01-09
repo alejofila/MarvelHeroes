@@ -1,5 +1,6 @@
 package com.example.marvelchallenge.data.remote
 
+import com.example.marvelchallenge.BuildConfig
 import com.example.marvelchallenge.data.remote.model.CharactersResponse
 import com.example.marvelchallenge.data.remote.model.ComicsResponse
 import com.example.marvelchallenge.data.remote.model.EventsResponse
@@ -9,7 +10,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private const val API_KEY = "a901d2ed4c486a86a4dae012cd20e7ec"
+private const val API_KEY = BuildConfig.MARVEL_API_KEY
 
 const val PAGE_LIMIT = 10
 
